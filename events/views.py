@@ -1,8 +1,18 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from datetime import date
+from django.views import generic
+from .models import Event
 
-# Create your views here.
 
+class UpcomingEventList(generic.ListView):
+    model = Event
+    template_name = 'events/index.html'
+    context_object_name = 'events'
+    paginate_by = 6
 
-def events(reques):
-    return HttpResponse("Welcom to Events App!")
+    def get_queryset(self):
+        return (
+            Event.objects
+            .filter(status=1, date__gte=date.today())
+            .order_by('date', 'time')
+        )
