@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>EventEase - Events</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+
     <h1>Upcoming Events</h1>
 
     {% if events %}
@@ -22,5 +18,5 @@
     {% else %}
         <p>No approved events available.</p>
     {% endif %}
-</body>
-</html>
+    
+{% endblock %}
