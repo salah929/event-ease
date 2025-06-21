@@ -32,15 +32,15 @@
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
+                            <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{{ logout_url }}">Logout</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
-                                href="{% url 'account_signup' %}">Sign up</a>
+                                href="{{ signup_url }}">Sign up</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
+                            <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{{ login_url}}">Login</a>
                         </li>
                     {% endif %}
                 </ul>
