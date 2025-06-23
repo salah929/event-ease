@@ -3,31 +3,49 @@
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}Log In{% endblock %}
 
 {% block content %}
 
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-            <h3>{% trans "Sign In" %}</h3>
+            <h2>Log in</h2>
 
-            <p>{% blocktrans %}Welcome back to event ease. To leave a comment or like a post, please log in. If
-                you
-                have not created an account yet, then <a class="link" href="{{ signup_url }}">sign up</a>
-                first.{% endblocktrans %}</p>
+            <p>
+                Welcome back to event ease. If you have not created an account yet, then <a class="link" href="{{ signup_url }}">sign up</a> first.
+            </p>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 mt-3 offset-md-2">
+        <div class="col-md-8 mt-2 offset-md-2">
             <form class="login" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+
+                {% for field in form %}
+                    <div class="row mb-2 align-items-center">
+                        <label for="{{ field.id_for_label }}" class="col-sm-4 col-lg-3">{{ field.label }}:</label>
+                        <div class="col-sm-8 col-lg-9">
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="text-danger small">{{ field.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <button class="btn btn-signup right" type="submit">{% trans "Sign In" %}</button>
+                <button class="btn btn-login" type="submit">Log in</button>
             </form>
+            {% if form.non_field_errors %}
+                <div class="errors">
+                    {% for error in form.non_field_errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

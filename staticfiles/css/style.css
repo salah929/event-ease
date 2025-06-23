@@ -6,15 +6,16 @@
 /*    --primary-font: "Inter", sans-serif; */
 /*    --secondary-font: "Nova Slim", cursive; */
 
-    --primary-color: #00008b; /* dark blue */
-    --secondary-color: #006400; /* dark green */
-    --third-color: #f5f5f5 /* whitesmoke */
+    --primary-color: #36454F; /* dark blue */
+    --secondary-color: #2F4F4F; /* dark slate gray */
+    --third-color: #f5f5f5; /* whitesmoke */
+    --hover-color: #008080;
 }
 
 
 /* Navbar & Footer */
 .navbar, footer {
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--primary-color));
+    background: var(--primary-color);
     color: var(--third-color);
 }
 
@@ -43,38 +44,58 @@ h1, h2 {
 }
 
 .btn-create:hover {
-    background-color: var(--primary-color);
-}
-
-.event-card {
-    border-color: var(--primary-color);
+    background-color: var(--hover-color);
 }
 
 .card-title {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 .btn-register {
     color: var(--third-color);
-    background-color: var(--primary-color);
-}
-
-.btn-register:hover {
     background-color: var(--secondary-color);
 }
 
-.btn-next, .btn-previous {
-    color: var(--primary-color);
+.btn-register:hover {
+    background-color: var(--hover-color);
 }
 
-.btn-next:hover, .btn-previous:hover {
+.btn-next, .btn-previous {
     color: var(--secondary-color);
 }
 
+.btn-next:hover, .btn-previous:hover {
+    color: var(--hover-color);
+}
+
 .btn-past {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 .btn-past:hover {
     color: var(--secondary-color);
+}
+
+/* login.html, logout.html, signup.html */
+.btn-login, .btn-logout, .btn-signup {
+    color: var(--third-color);
+    background-color: var(--secondary-color);
+}
+
+.btn-login:hover, .btn-logout:hover, .btn-signup:hover {
+    color: var(--third-color);
+    background-color: var(--hover-color);
+}
+
+.link {
+    color: var(--secondary-color);
+}
+
+.link:hover {
+    color: var(--hover-color);
+}
+
+.error {
+    color: red;
+    font-style: italic;
 }
