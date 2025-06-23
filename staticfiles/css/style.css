@@ -6,7 +6,7 @@
 /*    --primary-font: "Inter", sans-serif; */
 /*    --secondary-font: "Nova Slim", cursive; */
 
-    --primary-color: #36454F; /* dark blue */
+    --primary-color: #00008b; /* dark blue */
     --secondary-color: #2F4F4F; /* dark slate gray */
     --third-color: #f5f5f5; /* whitesmoke */
     --hover-color: #008080;
@@ -77,12 +77,12 @@ h1, h2 {
 }
 
 /* login.html, logout.html, signup.html */
-.btn-login, .btn-logout, .btn-signup {
+.btn-event {
     color: var(--third-color);
     background-color: var(--secondary-color);
 }
 
-.btn-login:hover, .btn-logout:hover, .btn-signup:hover {
+.btn-event:hover {
     color: var(--third-color);
     background-color: var(--hover-color);
 }

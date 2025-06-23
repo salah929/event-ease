@@ -77,12 +77,12 @@ h1, h2 {
 }
 
 /* login.html, logout.html, signup.html */
-.btn-login, .btn-logout, .btn-signup {
+.btn-event {
     color: var(--third-color);
     background-color: var(--secondary-color);
 }
 
-.btn-login:hover, .btn-logout:hover, .btn-signup:hover {
+.btn-event:hover {
     color: var(--third-color);
     background-color: var(--hover-color);
 }

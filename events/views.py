@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from datetime import date
 from django.views import generic
+from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
+from .forms import EventForm
 from .models import Event
 
 
@@ -30,3 +33,18 @@ class PastEventList(generic.ListView):
             .filter(status=1, date__lt=date.today())
             .order_by('-date', '-time')
         )
+
+
+class EventCreateView(CreateView):
+    model = Event
+    form_class = EventForm
+    template_name = 'events/event_create.html'
+    success_url = '/success'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
+
+class SuccessView(TemplateView):
+    template_name = 'events/success.html'
