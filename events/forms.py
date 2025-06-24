@@ -1,5 +1,5 @@
 from django import forms
-from .models import Event
+from .models import Event, EventRegistration
 
 
 class EventForm(forms.ModelForm):
@@ -18,4 +18,13 @@ class EventForm(forms.ModelForm):
                 'type': 'time', 'class': 'form-control'
             }),
             'location': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class EventRegistrationForm(forms.ModelForm):
+    class Meta:
+        model = EventRegistration
+        fields = ['note']
+        widgets = {
+            'note': forms.TextInput(attrs={'class': 'form-control w-100'}),
         }

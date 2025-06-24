@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <!-- Event Info -->
+    <div class="mb-4">
+        <h1 class="mb-3">{{ event.title }}</h1>
+        <div class="card shadow-sm p-4">
+            <p class="mb-2">{{ event.description }}</p>
+            <ul class="list-unstyled text-muted small mb-0">
+                <li><strong>Date:</strong> {{ event.date }}</li>
+                <li><strong>Time:</strong> {{ event.time }}</li>
+                <li><strong>Location:</strong> {{ event.location }}</li>
+                <li><strong>Created by:</strong> {{ event.created_by.get_full_name|default:event.created_by.username }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Two Columns -->
+    <div class="row">
+        <!-- Registered Users -->
+        <div class="col-md-6 mb-4">
+            <div class="border rounded p-4 bg-light">
+                <h4 class="mb-3">Registered Users ({{ registrations.count }})</h4>
+                <ul>
+                    {% for registration in registrations %}
+                        <li>
+                            <span class="name">{{ registration.user.get_full_name|default:registration.user.username }}</span>
+                            {% if registration.note %}
+                                <span class="note">: {{ registration.note }}</span>
+                            {% endif %}
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">No users registered yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="col-md-6 mb-4">
+            <div class="border rounded p-4 bg-light">
+                {% if user.is_authenticated %}
+                    {% if already_registered %}
+                        <h4 class="mb-3">Register for this Event</h4>
+                        <div class="cancel-form">
+                            <form method="post" onsubmit="return confirm('Are you sure you want to cancel your registration?');">
+                                {% csrf_token %}
+                                <input type="hidden" name="cancel_registration" value="1">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <p class="mt-1">You are already registered</p>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <button type="submit" name="cancel" class="btn btn-danger w-100">Cancel Registration</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="update-form">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="update_registration" value="1">
+                                <div class="row">
+                                    <div class="col-md-7 mb-2">
+                                        {{ form.note }}
+                                    </div>
+                                    <div class="col-md-5">
+                                        <button type="submit" name="update" class="btn btn-event w-100">Update Note</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    {% else %}
+                        <h4 class="mb-3">Register for this Event</h4>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                {{ form.note.label_tag }}
+                                {{ form.note }}
+                            </div>
+                            <button type="submit" class="btn btn-event w-100">Register</button>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <p class="text-muted">Please <a href="{% url 'account_login' %}">login</a> to register.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

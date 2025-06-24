@@ -99,3 +99,22 @@ h1, h2 {
     color: red;
     font-style: italic;
 }
+
+/* event_detials.html */
+h4, h6 {
+    color: var(--secondary-color);
+}
+
+.cancel-form, .update-form {
+    margin-top: 1rem;
+}
+
+.name {
+    font-weight:bold;
+}
+
+.note {
+    font-size: 85%;
+    color: #555;
+    font-style: italic;
+}
