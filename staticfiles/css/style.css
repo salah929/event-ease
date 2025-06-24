@@ -73,7 +73,7 @@ h1, h2 {
 }
 
 .btn-past:hover {
-    color: var(--secondary-color);
+    color: var(--hover-color);
 }
 
 /* login.html, logout.html, signup.html */
