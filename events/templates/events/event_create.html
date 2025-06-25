@@ -10,13 +10,16 @@
     </div>
     <div class="row">
         <div class="col-md-8 mt-4 offset-md-2">
-            <form method="POST" class="create-form">
+            <form method="POST" enctype="multipart/form-data" class="create-form">
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="row mb-2 align-items-center">
                         <label for="{{ field.id_for_label }}" class="col-3">{{ field.label }}:</label>
                         <div class="col-sm-9 col-xl-6">
                             {{ field }}
+                            {% if field.name == "featured_image" %}
+                                <small class="form-text text-muted">Max size: 2 MB. Accepted formats: jpg, png.</small>
+                            {% endif %}
                             {% if field.errors %}
                                 <div class="text-danger small">{{ field.errors }}</div>
                             {% endif %}

@@ -43,22 +43,19 @@ h1, h2 {
     background-color: var(--secondary-color);
 }
 
-.btn-create:hover {
-    background-color: var(--hover-color);
-}
-
 .card-title {
     color: var(--secondary-color);
 }
 
 .img-event-container {
     text-align: center;
+    height: 200px;
 }
 
 .img-event {
-    max-height: 200px;
+    max-height: 100%;
+    max-width: 98%;
     width: auto;
-    border-radius: 0;
 }
 
 .btn-register {
@@ -66,22 +63,14 @@ h1, h2 {
     background-color: var(--secondary-color);
 }
 
-.btn-register:hover {
-    background-color: var(--hover-color);
-}
-
-.btn-next, .btn-previous {
+.btn-next, .btn-previous, .btn-past {
     color: var(--secondary-color);
 }
 
-.btn-next:hover, .btn-previous:hover {
-    color: var(--hover-color);
-}
-
-.btn-past {
-    color: var(--secondary-color);
-}
-
+.btn-create:hover,
+.btn-register:hover,
+.btn-next:hover,
+.btn-previous:hover
 .btn-past:hover {
     color: var(--hover-color);
 }
