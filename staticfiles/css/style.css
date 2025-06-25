@@ -118,3 +118,8 @@ h4, h6 {
     color: #555;
     font-style: italic;
 }
+
+/* about.html */
+.img-about {
+    width: 100%;
+}

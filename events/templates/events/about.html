@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="border rounded p-4 bg-light mt-4">
+        <div class="row">
+            <div class="col-md-4 col-lg-3 col-xl-2">
+                <img src="{% static 'images/abouteventease.png' %}" alt="About Event Ease" class="img-about">
+            </div>
+            <div class="col-md-8 col-lg-9 col-xl-10">
+                <h2>About Event Ease</h2>
+                <p>
+                    Welcome to EventEase – your ultimate destination for discovering, registering for, and managing exciting upcoming events.
+                    Whether you're looking to attend a local meetup, join a community workshop, or organize your own event, EventEase makes the entire process seamless and user-friendly.
+                    Our platform is designed to keep you informed about the latest happenings, encourage community participation, and ensure that you never miss out on valuable experiences.
+                    From browsing events to connecting with fellow attendees, everything you need is just a few clicks away.
+                    Get involved, stay connected, and make every event count – only with EventEase.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="border rounded p-4 bg-light mt-4">
+        <div class="row">
+            <div class="col-md-4 col-lg-3 col-xl-2">
+                <img src="{% static 'images/abouttheprogrammer.png' %}" alt="About the programmer" class="img-about">
+            </div>
+            <div class="col-md-8 col-lg-9 col-xl-10">
+                <h2>About the programmer</h2>
+                <p>
+                    Hello! I'm Salah, the developer behind EventEase — a passionate and self-driven programmer with a deep interest in building practical, user-friendly web applications.
+                    With experience in Python, Django, HTML, CSS, JavaScript, and Bootstrap, I enjoy turning ideas into real-world solutions. My goal is to create platforms that are not only functional but also intuitive and engaging for users.
+                    This project was built as a hands-on learning experience, covering everything from user authentication and event management to contact forms and admin functionality.
+                    Along the way, I gained valuable insights into full-stack development, deployment, and user-centered design.
+                    Whether you’re a fellow developer, a curious visitor, or a potential collaborator — thank you for stopping by and using EventEase!
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

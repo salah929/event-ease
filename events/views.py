@@ -154,3 +154,7 @@ class ContactView(View):
             )
             return redirect('/success?f=c')
         return render(request, 'events/contact.html', {'form': form})
+
+
+class AboutView(TemplateView):
+    template_name = 'events/about.html'
