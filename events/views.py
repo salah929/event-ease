@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from datetime import date
-from django.views import generic
+from django.views import generic, View
 from django.views.generic import TemplateView, DetailView
 from django.views.generic.edit import CreateView, FormMixin
 from django.shortcuts import redirect
-from .forms import EventForm, EventRegistrationForm
-from .models import Event, EventRegistration
+from .forms import EventForm, EventRegistrationForm, ContactForm
+from .models import Event, EventRegistration, ContactMessage
 
 
 class UpcomingEventList(generic.ListView):
@@ -40,7 +40,7 @@ class EventCreateView(CreateView):
     model = Event
     form_class = EventForm
     template_name = 'events/event_create.html'
-    success_url = '/success'
+    success_url = '/success?f=e'
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -49,6 +49,11 @@ class EventCreateView(CreateView):
 
 class SuccessView(TemplateView):
     template_name = 'events/success.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['f'] = self.request.GET.get('f', 'a')
+        return context
 
 
 class EventDetails(FormMixin, DetailView):
@@ -132,3 +137,20 @@ class EventDetails(FormMixin, DetailView):
                 "is_registered": is_registered,
             },
         )
+
+
+class ContactView(View):
+    def get(self, request):
+        form = ContactForm()
+        return render(request, 'events/contact.html', {'form': form})
+
+    def post(self, request):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            ContactMessage.objects.create(
+                name=form.cleaned_data['name'],
+                email=form.cleaned_data['email'],
+                message=form.cleaned_data['message']
+            )
+            return redirect('/success?f=c')
+        return render(request, 'events/contact.html', {'form': form})

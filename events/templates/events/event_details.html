@@ -20,7 +20,7 @@
     <!-- Two Columns -->
     <div class="row">
         <!-- Registered Users -->
-        <div class="col-md-6 mb-4">
+        <div class="col-lg-6 mb-4">
             <div class="border rounded p-4 bg-light">
                 <h4 class="mb-3">Registered Users ({{ registrations.count }})</h4>
                 <ul>
@@ -39,7 +39,7 @@
         </div>
 
         <!-- Registration Form -->
-        <div class="col-md-6 mb-4">
+        <div class="col-lg-6 mb-4">
             <div class="border rounded p-4 bg-light">
                 {% if user.is_authenticated %}
                     {% if already_registered %}

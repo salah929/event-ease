@@ -3,8 +3,13 @@
 <div class="container">
     <div class=" text-center">
         <h2 class="mt-4 mb-4">Thank you!</h2>
-        <p class="lead">The event has been created and waiting for the approval.</p>
-        <p class="lead">As soon as it is approved, it will be shown in the event list.</p>
+        {% if f == 'c' %}
+            <p class="lead">Your message has been sent.</p>
+            <p class="lead">The administration will reply you soon if needed.</p>
+        {% else %}
+            <p class="lead">Your event has been successfully created and is now pending approval.</p>
+            <p class="lead">Once it has been approved, it will appear in the event list.</p>
+        {% endif %}
         <a href="{% url 'home' %}" class="btn btn-event mt-3">Back to Home</a>
     </div>
 </div>

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Event, EventRegistration
+from .models import Event, EventRegistration, ContactMessage
 
 
 class EventForm(forms.ModelForm):
@@ -9,7 +9,7 @@ class EventForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={
-                'class': 'form-control', 'rows': 5, 'id': "desc"
+                'class': 'form-control', 'rows': 5
             }),
             'date': forms.DateInput(attrs={
                 'type': 'date', 'class': 'form-control'
@@ -27,4 +27,17 @@ class EventRegistrationForm(forms.ModelForm):
         fields = ['note']
         widgets = {
             'note': forms.TextInput(attrs={'class': 'form-control w-100'}),
+        }
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactMessage
+        fields = ['name', 'email', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'message': forms.Textarea(attrs={
+                'class': 'form-control', 'rows': 5
+            }),
         }

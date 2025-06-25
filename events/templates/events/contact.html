@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 offset-md-2">
+            <h2>Contact us</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mt-4 offset-md-2">
+            <form method="POST" class="create-form">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="row mb-2 align-items-center">
+                        <label for="{{ field.id_for_label }}" class="col-3">{{ field.label }}:</label>
+                        <div class="col-sm-9 col-xl-6">
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="text-danger small">{{ field.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-event mt-3 mb-2">Send message</button>
+            </form>
+            {% if form.non_field_errors %}
+                <div class="errors">
+                    {% for error in form.non_field_errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
