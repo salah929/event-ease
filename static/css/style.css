@@ -51,6 +51,16 @@ h1, h2 {
     color: var(--secondary-color);
 }
 
+.img-event-container {
+    text-align: center;
+}
+
+.img-event {
+    max-height: 200px;
+    width: auto;
+    border-radius: 0;
+}
+
 .btn-register {
     color: var(--third-color);
     background-color: var(--secondary-color);

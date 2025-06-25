@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Pending"), (1, "Approved"))
 
@@ -16,6 +17,7 @@ class Event(models.Model):
                                    related_name='created_events')
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    featured_image = CloudinaryField('image', default='placeholder')
 
     class Meta:
         ordering = ['-created_at']
