@@ -6,6 +6,16 @@ from cloudinary.models import CloudinaryField
 STATUS = ((0, "Pending"), (1, "Approved"))
 
 
+def generate_unique_slug(title, model):
+    base_slug = slugify(title)
+    slug = base_slug
+    counter = 1
+    while model.objects.filter(slug=slug).exists():
+        slug = f"{base_slug}-{counter}"
+        counter += 1
+    return slug
+
+
 class Event(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
@@ -24,7 +34,7 @@ class Event(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = generate_unique_slug(self.title, Event)
         super().save(*args, **kwargs)
 
     def __str__(self):
