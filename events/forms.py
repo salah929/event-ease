@@ -33,7 +33,12 @@ class EventForm(forms.ModelForm):
         image = self.cleaned_data.get('featured_image')
         max_size_mb = 3
 
-        if image and image.size > max_size_mb * 1024 * 1024:
+        if (
+            image and
+            hasattr(image, 'size') and
+            image.size and
+            image.size > max_size_mb * 1024 * 1024
+        ):
             raise ValidationError(
                 f"The image file is too large (>{max_size_mb}MB)."
             )
