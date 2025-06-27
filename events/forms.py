@@ -1,8 +1,7 @@
 from django import forms
 from .models import Event, EventRegistration, ContactMessage
 from django.forms import ClearableFileInput
-from django.contrib.auth.forms import AuthenticationForm
-from allauth.account.forms import SignupForm
+from allauth.account.forms import LoginForm, SignupForm
 from django.core.exceptions import ValidationError
 from datetime import datetime, timedelta
 
@@ -76,19 +75,18 @@ class ContactForm(forms.ModelForm):
         }
 
 
-class CustomLoginForm(AuthenticationForm):
-    username = forms.CharField(
-        widget=forms.TextInput(attrs={
+class CustomLoginForm(LoginForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['login'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'Username'
+            'placeholder': 'Username or Email'
         })
-    )
-    password = forms.CharField(
-        widget=forms.PasswordInput(attrs={
+        self.fields['password'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Password'
         })
-    )
 
 
 class CustomSignupForm(SignupForm):
