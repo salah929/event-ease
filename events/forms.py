@@ -7,6 +7,10 @@ from .models import Event, EventRegistration, ContactMessage
 
 
 class EventCreateForm(forms.ModelForm):
+    """
+    Form for creating an event with custom widgets,
+    default values, and image size validation.
+    """
     class Meta:
         model = Event
         fields = [
@@ -54,6 +58,9 @@ class EventCreateForm(forms.ModelForm):
 
 
 class EventRegistrationForm(forms.ModelForm):
+    """
+    Form for registering to an event with an optional note input.
+    """
     class Meta:
         model = EventRegistration
         fields = ['note']
@@ -63,6 +70,9 @@ class EventRegistrationForm(forms.ModelForm):
 
 
 class ContactForm(forms.ModelForm):
+    """
+    Form for submitting a contact message with name, email, and message fields.
+    """
     class Meta:
         model = ContactMessage
         fields = ['name', 'email', 'message']
@@ -76,6 +86,10 @@ class ContactForm(forms.ModelForm):
 
 
 class CustomLoginForm(LoginForm):
+    """
+    Customizes the login form with Bootstrap styling
+    and placeholders for fields.
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -90,6 +104,10 @@ class CustomLoginForm(LoginForm):
 
 
 class CustomSignupForm(SignupForm):
+    """
+    Extends the default signup form to include first and last name fields,
+    with customized Bootstrap styling and placeholders.
+    """
     first_name = forms.CharField(
         max_length=30,
         label='First Name',
@@ -106,6 +124,10 @@ class CustomSignupForm(SignupForm):
     )
 
     def __init__(self, *args, **kwargs):
+        """
+        Initializes the signup form with Bootstrap styling and placeholders
+        for username, email, and password fields.
+        """
         super().__init__(*args, **kwargs)
 
         self.fields['username'].widget.attrs.update({
@@ -123,6 +145,10 @@ class CustomSignupForm(SignupForm):
         })
 
     def save(self, request):
+        """
+        Saves the user and updates the first and last name from the form data
+        before returning the user instance.
+        """
         user = super().save(request)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']

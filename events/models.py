@@ -7,6 +7,11 @@ STATUS = ((0, "Pending"), (1, "Approved"))
 
 
 def generate_unique_slug(title, model):
+    """
+    Returns a unique slug for the given title
+    by checking existing slugs in the model.
+    If the slug already exists, appends a number to make it unique.
+    """
     base_slug = slugify(title)
     slug = base_slug
     counter = 1
@@ -17,6 +22,10 @@ def generate_unique_slug(title, model):
 
 
 class Event(models.Model):
+    """
+    Represents an event with details such as title, date, location, and status.
+    Automatically generates a unique slug on save if not provided.
+    """
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     description = models.TextField()
@@ -33,6 +42,10 @@ class Event(models.Model):
         ordering = ['-created_at']
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the default save method to generate a unique slug
+        from the title if not provided.
+        """
         if not self.slug:
             self.slug = generate_unique_slug(self.title, Event)
         super().save(*args, **kwargs)
@@ -42,6 +55,10 @@ class Event(models.Model):
 
 
 class EventRegistration(models.Model):
+    """
+    Links a user to an event registration with an optional note.
+    Ensures a user can register only once per event.
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='registrations')
     event = models.ForeignKey(Event, on_delete=models.CASCADE,
@@ -58,6 +75,10 @@ class EventRegistration(models.Model):
 
 
 class ContactMessage(models.Model):
+    """
+    Stores messages submitted through a contact form,
+    including sender info and timestamp.
+    """
     name = models.CharField(max_length=100)
     email = models.EmailField()
     message = models.TextField()
