@@ -1,12 +1,12 @@
 from django import forms
-from .models import Event, EventRegistration, ContactMessage
 from django.forms import ClearableFileInput
 from allauth.account.forms import LoginForm, SignupForm
 from django.core.exceptions import ValidationError
 from datetime import datetime, timedelta
+from .models import Event, EventRegistration, ContactMessage
 
 
-class EventForm(forms.ModelForm):
+class EventCreateForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = [
@@ -32,7 +32,7 @@ class EventForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(EventForm, self).__init__(*args, **kwargs)
+        super(EventCreateForm, self).__init__(*args, **kwargs)
         one_week_later = datetime.now().date() + timedelta(weeks=1)
         self.fields['date'].initial = one_week_later
         self.fields['time'].initial = '09:00'

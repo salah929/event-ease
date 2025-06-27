@@ -1,13 +1,13 @@
 from django.shortcuts import render
-from datetime import date
 from django.views import generic, View
 from django.views.generic import TemplateView, DetailView
 from django.views.generic.edit import CreateView, FormMixin
 from django.shortcuts import redirect
-from .forms import EventForm, EventRegistrationForm, ContactForm
-from .forms import CustomLoginForm, CustomSignupForm
-from .models import Event, EventRegistration, ContactMessage
 from django.contrib.auth.views import LoginView
+from datetime import date
+from .forms import EventCreateForm, EventRegistrationForm, ContactForm
+from .forms import CustomLoginForm
+from .models import Event, EventRegistration, ContactMessage
 
 
 class UpcomingEventList(generic.ListView):
@@ -40,7 +40,7 @@ class PastEventList(generic.ListView):
 
 class EventCreateView(CreateView):
     model = Event
-    form_class = EventForm
+    form_class = EventCreateForm
     template_name = 'events/event_create.html'
     success_url = '/success?f=e'
 
