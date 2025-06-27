@@ -24,7 +24,6 @@
             {% for event in events %}
                 <div class="col">
                     <div class="card h-100 shadow-sm">
-
                         <div class="img-event-container">
                         {% if "placeholder" in event.featured_image.url %}
                             <img class="card-img-top img-event mt-1" src="{% static 'images/default.png' %}" alt="placeholder image">
@@ -32,13 +31,12 @@
                             <img class="card-img-top img-event mt-1" src=" {{ event.featured_image.url }}" alt="{{ event.title }}">
                         {% endif %}
                         </div>
-
                         <div class="card-body d-flex flex-column justify-content-between">
                             <div>
-                                <h5 class="card-title text-center">{{ event.title }}</h5>
-                                <p class="card-text">{{ event.description|linebreaks }}</p>
+                                <h5 class="card-title text-center mb-3">{{ event.title }}</h5>
+                                <p class="card-text">{{ event.description }}</p>
                             </div>
-                            <ul class="list-unstyled mt-2 small">
+                            <ul class="list-unstyled mt-3 small">
                                 <li><strong>Date:</strong> {{ event.date }} at {{ event.time }}</li>
                                 <li><strong>Location:</strong> {{ event.location }}</li>
                                 <li><strong>Created by:</strong> {{ event.created_by.get_full_name|default:event.created_by.username }}</li>

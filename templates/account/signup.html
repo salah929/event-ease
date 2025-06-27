@@ -8,8 +8,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 mt-3 offset-md-2">
-      <h2>Sign up</h2>
-
+      <h2 class="mb-3">Sign up</h2>
       <p>
         Welcome to the event ease. Do you already have an account? Then please <a class="link" href="{{ login_url }}">log in</a> instead.
       </p>
@@ -38,7 +37,7 @@
         <button class="btn btn-event mt-3 mb-3" type="submit">Sign up</button>
       </form>
       {% if form.non_field_errors %}
-          <div class="errors">
+          <div class="alert alert-danger mt-2">
               {% for error in form.non_field_errors %}
                   <div class="error">{{ error }}</div>
               {% endfor %}

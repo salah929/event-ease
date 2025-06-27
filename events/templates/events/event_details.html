@@ -26,7 +26,12 @@
                 <ul>
                     {% for registration in registrations %}
                         <li>
-                            <span class="name">{{ registration.user.get_full_name|default:registration.user.username }}</span>
+                            <span class="name">
+                                {{ registration.user.get_full_name|default:registration.user.username }}
+                                {% if registration.user == user %}
+                                    <span> (You)</span>
+                                {% endif %}
+                            </span>
                             {% if registration.note %}
                                 <span class="note">: {{ registration.note }}</span>
                             {% endif %}

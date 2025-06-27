@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-md-8 mt-4 offset-md-2">
-            <form method="POST" class="create-form">
+            <form method="POST" class="create-form" autocomplete="off">
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="row mb-2 align-items-center">

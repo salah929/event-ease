@@ -38,9 +38,14 @@ h1, h2 {
     color: var(--secondary-color);
 }
 
-.btn-create {
+.btn-create, .btn-register {
     color: var(--third-color);
     background-color: var(--secondary-color);
+}
+
+.btn-create:hover,
+.btn-register:hover {
+    background-color: var(--hover-color);
 }
 
 .card-title {
@@ -58,19 +63,12 @@ h1, h2 {
     width: auto;
 }
 
-.btn-register {
-    color: var(--third-color);
-    background-color: var(--secondary-color);
-}
-
 .btn-next, .btn-previous, .btn-past {
     color: var(--secondary-color);
 }
 
-.btn-create:hover,
-.btn-register:hover,
 .btn-next:hover,
-.btn-previous:hover
+.btn-previous:hover,
 .btn-past:hover {
     color: var(--hover-color);
 }
@@ -92,11 +90,6 @@ h1, h2 {
 
 .link:hover {
     color: var(--hover-color);
-}
-
-.error {
-    color: red;
-    font-style: italic;
 }
 
 /* event_detials.html */
@@ -121,4 +114,6 @@ h4, h6 {
 /* about.html */
 .img-about {
     width: 100%;
+    height: auto;
+    border-radius: 8px;
 }

@@ -8,19 +8,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-            <h2>Log out</h2>
+            <h2 class="mb-3">Log out</h2>
             <p>Are you sure you want to log out?</p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
-
             <form method="post" action="{% url 'account_logout' %}">
                 {% csrf_token %}
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <button class="btn btn-event" type="submit">Log out</button>
+                <button class="btn btn-danger" type="submit">Log out</button>
+                <a href="{% url 'home' %}" class="btn btn-event ms-2">Cancel</a>
             </form>
         </div>
     </div>
