@@ -2,6 +2,7 @@ from django import forms
 from .models import Event, EventRegistration, ContactMessage
 from django.forms import ClearableFileInput
 from django.core.exceptions import ValidationError
+from datetime import datetime, timedelta, time
 
 
 class EventForm(forms.ModelForm):
@@ -28,6 +29,12 @@ class EventForm(forms.ModelForm):
                 'accept': 'image/*',
             }),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(EventForm, self).__init__(*args, **kwargs)
+        one_week_later = datetime.now().date() + timedelta(weeks=1)
+        self.fields['date'].initial = one_week_later
+        self.fields['time'].initial = '09:00'
 
     def clean_featured_image(self):
         image = self.cleaned_data.get('featured_image')
