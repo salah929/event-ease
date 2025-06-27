@@ -5,7 +5,9 @@ from django.views.generic import TemplateView, DetailView
 from django.views.generic.edit import CreateView, FormMixin
 from django.shortcuts import redirect
 from .forms import EventForm, EventRegistrationForm, ContactForm
+from .forms import CustomLoginForm, CustomSignupForm
 from .models import Event, EventRegistration, ContactMessage
+from django.contrib.auth.views import LoginView
 
 
 class UpcomingEventList(generic.ListView):
@@ -158,3 +160,8 @@ class ContactView(View):
 
 class AboutView(TemplateView):
     template_name = 'events/about.html'
+
+
+class CustomLoginView(LoginView):
+    authentication_form = CustomLoginForm
+    template_name = 'templates/account/login.html'

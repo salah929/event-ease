@@ -1,8 +1,10 @@
 from django import forms
 from .models import Event, EventRegistration, ContactMessage
 from django.forms import ClearableFileInput
+from django.contrib.auth.forms import AuthenticationForm
+from allauth.account.forms import SignupForm
 from django.core.exceptions import ValidationError
-from datetime import datetime, timedelta, time
+from datetime import datetime, timedelta
 
 
 class EventForm(forms.ModelForm):
@@ -72,3 +74,59 @@ class ContactForm(forms.ModelForm):
                 'class': 'form-control', 'rows': 5
             }),
         }
+
+
+class CustomLoginForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Username'
+        })
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Password'
+        })
+    )
+
+
+class CustomSignupForm(SignupForm):
+    first_name = forms.CharField(
+        max_length=30,
+        label='First Name',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control', 'placeholder': 'First Name'
+        })
+    )
+    last_name = forms.CharField(
+        max_length=30,
+        label='Last Name',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control', 'placeholder': 'Last Name'
+        })
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Username'
+        })
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control', 'placeholder': 'Email'
+        })
+        self.fields['password1'].widget.attrs.update({
+            'class': 'form-control', 'placeholder': 'Password'
+        })
+        self.fields['password2'].widget.attrs.update({
+            'class': 'form-control', 'placeholder': 'Confirm Password'
+        })
+
+    def save(self, request):
+        user = super().save(request)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.save()
+        return user
