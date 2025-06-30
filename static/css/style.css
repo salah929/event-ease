@@ -46,6 +46,7 @@ h1, h2 {
 
 .btn-create:hover,
 .btn-register:hover {
+    color: var(--third-color);
     background-color: var(--hover-color);
 }
 
